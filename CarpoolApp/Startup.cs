@@ -18,18 +18,20 @@ namespace CarpoolApp
 {
     public class Startup
     {
+        private readonly IConfiguration _config;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _config = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
          {
-        //    services.AddDbContext<CarPostContext>(opt =>
-        //       opt.UseInMemoryDatabase("CarPostList"));
+            services.AddDbContext<CarPostContext>(opt =>
+                {
+                    opt.UseNpgsql(_config.GetConnectionString("DefaultConnection"));
+                }
+            );
             services.AddControllers();
         }
 

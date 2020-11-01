@@ -11,11 +11,13 @@ namespace CarpoolApp.Models
         public string Departure { get; set; }
         public string Destination { get; set; }
         public List<string> Dropoff { get; set; }
-        public DateTime DimeBegin { get; set; }
-        public DateTime DimeEnd { get; set; }
-        public int Dccupancy { get; set; }
+        public DateTime TimeBegin { get; set; }
+        public DateTime TimeEnd { get; set; }
+        public int Occupancy { get; set; }
         public int Luggage { get; set; }
         public string Note { get; set; }
+
+        //TODO - Poster ID, Booker ID, etc
 
     }
 }

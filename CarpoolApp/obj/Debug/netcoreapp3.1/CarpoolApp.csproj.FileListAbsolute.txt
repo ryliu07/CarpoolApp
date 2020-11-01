@@ -48,3 +48,4 @@ C:\Users\liuru\Desktop\workplace\CarpoolApp\CarpoolApp\CarpoolApp\bin\Debug\netc
 C:\Users\liuru\Desktop\workplace\CarpoolApp\CarpoolApp\CarpoolApp\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\liuru\Desktop\workplace\CarpoolApp\CarpoolApp\CarpoolApp\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\liuru\Desktop\workplace\CarpoolApp\CarpoolApp\CarpoolApp\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\liuru\Desktop\workplace\CarpoolApp\CarpoolApp\CarpoolApp\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
