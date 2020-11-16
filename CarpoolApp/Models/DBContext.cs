@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarpoolApp.Models
 {
-    public class CarPostContext : DbContext
+    public class DBContext : DbContext
     {
-        public CarPostContext(DbContextOptions options) : base(options)
+        public DBContext(DbContextOptions options) : base(options)
         {
         }
 
         public DbSet<CarPost> CarPost { get; set; }
+
+        public DbSet<AppUser> AppUser { get; set; }
     }
 }

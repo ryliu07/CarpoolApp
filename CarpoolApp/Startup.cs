@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using CarpoolApp.Models;
 
 namespace CarpoolApp
 {
@@ -27,7 +26,17 @@ namespace CarpoolApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
          {
-            services.AddDbContext<CarPostContext>(opt =>
+            services.AddCors(options =>
+            {
+                options.AddPolicy("GlobalPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://gtacarpool.com",
+                                            "http://localhost:4200");
+                    });
+            });
+
+            services.AddDbContext<DBContext>(opt =>
                 {
                     opt.UseNpgsql(_config.GetConnectionString("DefaultConnection"));
                 }
@@ -38,6 +47,7 @@ namespace CarpoolApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //ordering matters in this method.
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -46,6 +56,8 @@ namespace CarpoolApp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
