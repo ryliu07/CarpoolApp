@@ -1,4 +1,5 @@
-﻿using CarpoolApp.Models;
+﻿using CarpoolApp.DTOs;
+using CarpoolApp.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,26 +29,30 @@ namespace CarpoolApp.Controllers
 
         [EnableCors("GlobalPolicy")]
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(string username, string password, string name, string email, long phoneNumber)
+        public async Task<ActionResult<AppUser>> Register(RegisterDto regDto)
         {
             //Hashing algorithm
             //using keyword to dispose hmac correctly
+            if (await EmailExists(regDto.Email)) return BadRequest("Email is already in use");
+
             using var hmac = new HMACSHA512();
 
             var user = new AppUser
             {
-                Username = username,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)),
-                PasswordSalt = hmac.Key,
-                Email = email,
-                Name = name,
-                PhoneNumber = phoneNumber
+                Email = regDto.Email.ToLower(),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(regDto.Password)),
+                PasswordSalt = hmac.Key
             };
 
             _context.AppUser.Add(user);
             await _context.SaveChangesAsync();
 
             return user;
+        }
+
+        public async Task<bool> EmailExists(string email)
+        {
+            return await _context.AppUser.AnyAsync(x => x.Email == email.ToLower());
         }
     }
 }
