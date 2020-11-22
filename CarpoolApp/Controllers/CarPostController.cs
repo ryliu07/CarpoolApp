@@ -1,4 +1,5 @@
 ﻿using CarpoolApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace CarpoolApp.Controllers
 
         [EnableCors("GlobalPolicy")]
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CarPost>>> GetCarPosts()
         {
             Console.WriteLine("hi");
@@ -27,6 +29,7 @@ namespace CarpoolApp.Controllers
 
         [EnableCors("GlobalPolicy")]
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CarPost>> GetCarPostFromID(long id)
         {
             return await _context.CarPost.FindAsync(id);

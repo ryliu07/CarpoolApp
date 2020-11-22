@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using CarpoolApp.Interfaces;
 
 namespace CarpoolApp
 {
@@ -26,6 +27,9 @@ namespace CarpoolApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
          {
+            //Also addsingleton and addtransient
+            services.AddScoped<ITokenService, ITokenService>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("GlobalPolicy",
@@ -41,7 +45,10 @@ namespace CarpoolApp
                     opt.UseNpgsql(_config.GetConnectionString("DefaultConnection"));
                 }
             );
+
             services.AddControllers();
+
+            //services.AddAuthentication(JwtBearerDefaults);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

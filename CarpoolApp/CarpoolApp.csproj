@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>a5f3c12c-9458-492a-a36a-176d4e5230a7</UserSecretsId>
   </PropertyGroup>
 
@@ -13,6 +13,7 @@
     </PackageReference>
     <PackageReference Include="MongoDB.Driver" Version="2.11.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
 
